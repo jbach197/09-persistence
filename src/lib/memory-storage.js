@@ -16,7 +16,10 @@ storage.fetchOne = (id) => {
 };
 
 storage.deleteOne = (id) => {
-
+  return new Promise( (resolve,reject) => {
+    if(database[id]) { resolve(database[id]); }
+    else { reject(`${id} not found`); }
+  });
 };
 
 storage.updateOne = (record) => {
