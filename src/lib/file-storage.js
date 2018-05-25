@@ -29,42 +29,29 @@ storage.fetchOne = (id) => {
         let record = JSON.parse(data.toString());
         resolve(record);
       }
-      else {
-        reject('Not found');
-      }
+      else {reject('Not found');}
     });
   });
 };
 
-storage.updateOne = (record) => {
-  //return new Promise( (resolve,reject) => {
-   // let file = `${dataDirectory}/${id}.json`;
-
-   // fs.readFile(file, (err,data) => {
-    //  if(err) { reject(err); }
-    //  if ( data ) {
-    //    let record = JSON.parse(data.toString());
-     //   resolve(record);
-     // }
-     // else {
-      //  reject('Not found');
-      //}
-    //});
- // });
-
-};
+storage.updateOne = (record) => {}
+  return new Promise( (resolve, reject) => {
+    let file = `${dataDirectory}/${record.id}.json`
+    let text = JSON.stringify(record);
+    fs.writeFile(file, text, (err) => {
+          if(err) { reject(err); }
+          else { resolve(record); }
+       });
+   });
 
 storage.deleteOne = (id) => {
- // return new Promise( (resolve,reject) => {
- //   let file = `${dataDirectory}/${record.id}.json`;
- //   fs.unlink(file, (err) => {
-  //    if(err) {reject(err);}
-   // })
-
-  //  });
- // });
-
-
+  return new Promise( (resolve, reject) => {
+    let file = `${dataDirectory}/${id}.json`
+    fs.unlink(file, (err) => {
+      if(err) {reject(err);}
+      else {resolve(record);}
+    });
+  });
 };
 
 storage.save = (record) => {
